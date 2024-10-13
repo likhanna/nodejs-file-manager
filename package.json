@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-file-manager",
+  "version": "1.0.0",
+  "description": "File manager using Node.js APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/likhanna"
+  },
+  "author": "Liliia Khannanova",
+  "license": "ISC"
+}
