@@ -2,14 +2,18 @@
   "name": "nodejs-file-manager",
   "version": "1.0.0",
   "description": "File manager using Node.js APIs",
-  "main": "index.js",
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "start:n": "node src/index.js --username=Liliia"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/likhanna"
+    "url": "https://github.com/likhanna/nodejs-file-manager.git"
   },
-  "author": "Liliia Khannanova",
+  "author": "likhanna",
   "license": "ISC"
 }
