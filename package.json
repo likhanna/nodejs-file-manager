@@ -2,6 +2,10 @@
   "name": "nodejs-file-manager",
   "version": "1.0.0",
   "description": "File manager using Node.js APIs",
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "start:n": "node src/index.js --username=Liliia"

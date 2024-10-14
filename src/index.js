@@ -1,26 +1,31 @@
-const args = process.argv.slice(2);
+import { homedir } from "node:os";
+import { validateCmd, handleCmd } from "./commands/index.js";
+import { parseInput } from "./utils/index.js";
+import { startSession } from "./utils/user.js";
 
-const usernameArg = args.find((arg) => arg.startsWith("--username="));
-const username = usernameArg
-  ? usernameArg.split("=")[1]
-  : process.env.npm_config_username;
+let currentDir = homedir();
+const session = startSession();
 
-console.log(`Welcome to the File Manager, ${username}!`);
+session.prompt();
+session.on("line", async (line) => {
+  const [cmd, ...args] = parseInput(line);
 
-process.stdin.on("data", (data) => {
-  const input = data.toString().trim();
+  if (validateCmd(cmd, args)) {
+    try {
+      const res = await handleCmd(cmd, currentDir, args);
 
-  // Если пользователь ввел '.exit', завершаем приложение
-  if (input === ".exit") {
-    exitApp();
+      if (res) {
+        currentDir = res;
+      }
+
+      console.log("Opeartion successful!");
+    } catch (error) {
+      console.log(error);
+      console.log("Operation failed");
+    }
+  } else {
+    console.log("Invalid input");
   }
+  console.log(`You are currently in ${currentDir}\n`);
+  session.prompt();
 });
-
-process.on("SIGINT", () => {
-  exitApp();
-});
-
-function exitApp() {
-  console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-  process.exit(0);
-}
